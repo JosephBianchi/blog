@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
   def create
     @article = Article.find(params[:article_id])
-    @comment = @article.comments.create(comment_params)
-    unless @comment.errors.any?
+    @comment = @article.comments.new(comment_params)
+    if @comment.save
       redirect_to article_path(@article)
     else
       render 'articles/show' #why in the world does this work!!
